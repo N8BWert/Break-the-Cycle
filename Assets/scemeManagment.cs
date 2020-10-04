@@ -23,4 +23,7 @@ public class scemeManagment : MonoBehaviour
     public void MainMenu() {
         SceneManager.LoadScene(menu);
     }
+    public void Escape() {
+        Application.Quit();
+    }
 }

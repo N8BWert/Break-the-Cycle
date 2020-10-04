@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DeathCountdown : MonoBehaviour
 {
@@ -28,14 +29,16 @@ public class DeathCountdown : MonoBehaviour
     public AudioClip rebirth;
 
     public int playAudio = 0;
-
+    public Slider deathSlider;
 
     void Start() {
         currentTime = maxTime;
         source = GetComponent<AudioSource>();
+        deathSlider.value = 0;
     }
     void Update() {
         currentTime -= Time.deltaTime;
+        deathSlider.value += Time.deltaTime;
         Adult();
         Old();
         DieOff();
@@ -82,17 +85,17 @@ public class DeathCountdown : MonoBehaviour
         Turtles[turtleIndex].SetActive(false);
         int i = instance * 3;
         turtleIndex = i;
+        if(turtleIndex >=15) { turtleIndex = 15; }
         Debug.Log(turtleIndex);
-        BoundCheck();
         Turtles[turtleIndex].SetActive(true);
         GameObject childObject = Instantiate(gravestone, new Vector2(0,-1.51f), transform.rotation) as GameObject;
         childObject.transform.parent = circleHolder.transform;
-        Messages[Mathf.Clamp(instance, 0, 6)].SetActive(true);
+        Messages[Mathf.Clamp(instance, 0, 5)].SetActive(true);
         if(playAudio != 0) {
             source.PlayOneShot(rebirth);
             playAudio = 0;
         }
-        
+        deathSlider.value = 0;
     }
     void DieOff() {
         if(currentTime <= 0 && !isDead) {
@@ -101,7 +104,7 @@ public class DeathCountdown : MonoBehaviour
     }
     void BoundCheck() {
         if(turtleIndex > 15) {
-            turtleIndex -= 3;
+            turtleIndex = 15;
         }
     }
 }

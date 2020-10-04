@@ -35,7 +35,7 @@ public class PlayerScript : MonoBehaviour
             rb.velocity = new Vector2(0, JumpVelocity);
         }
         else if(isGrounded && !Input.GetButtonDown("Jump")) {
-            rb.velocity = Vector2.zero;
+            //rb.velocity = Vector2.zero;
             gameObject.transform.rotation = Quaternion.identity;
         }
         MovementCheck();

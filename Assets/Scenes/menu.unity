@@ -492,8 +492,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.012123, y: 0.00014496}
-  m_SizeDelta: {x: 1599.9756, y: 556.35516}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 1680, y: 800}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1717417450
 MonoBehaviour:
@@ -585,7 +585,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1600, y: 800}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -743,7 +743,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 24300002, guid: 5ddae68d5fcbd66449d96041da9d4002,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: ed0fc8bf7abf3a6468b08be3eb330892, type: 3}
+  m_audioClip: {fileID: 8300000, guid: a94cec1c6b843cb478e0a73606285207, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
