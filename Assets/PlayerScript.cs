@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerScript : MonoBehaviour
 {
@@ -13,32 +14,43 @@ public class PlayerScript : MonoBehaviour
     public float gravity = 0.05f;
 
     private Animator anim;
+    public AudioClip gameOver;
+
+    private Rigidbody2D rb;
+    public bool onPlatform = false;
+
+    public GameObject restartButton;
+    public GameObject menuButton;
+    public GameObject TurtleHolder;
+
+    public Text endCounterText;
 
     void Start() {
         anim = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody2D>();
     }
     void Update() {
         GroundCheck();
-        if(isGrounded) {
-            if(Input.GetButtonDown("Jump")) {
-                JumpVector.y = JumpVelocity;
-            } 
-            else { JumpVector.y = 0; }
+        if(isGrounded && Input.GetButtonDown("Jump")) {
+            rb.velocity = new Vector2(0, JumpVelocity);
         }
-        if(!isGrounded) {
-            JumpVector.y -= gravity * Time.deltaTime;
+        else if(isGrounded && !Input.GetButtonDown("Jump")) {
+            rb.velocity = Vector2.zero;
+            gameObject.transform.rotation = Quaternion.identity;
         }
-        gameObject.transform.Translate(JumpVector);
         MovementCheck();
     }
     void GroundCheck() {
-        if(gameObject.transform.position.y <= -2.97) {
+        if(gameObject.transform.position.y <= -2.97 && !onPlatform) {
             isGrounded = true;
             anim.SetBool("isGrounded", true);
         }
-        else {
+        else if(gameObject.transform.position.y > -2.97 && !onPlatform){
             isGrounded = false;
             anim.SetBool("isGrounded", false);
+        }
+        if(onPlatform) {
+            isGrounded = true;
         }
         if(isGrounded) {
             anim.SetBool("isGrounded", true);
@@ -55,8 +67,12 @@ public class PlayerScript : MonoBehaviour
     }
 
     public void kill() {
+        TurtleHolder.GetComponent<AudioSource>().PlayOneShot(gameOver);
+        endCounterText.text = "It took you " + TurtleHolder.GetComponent<DeathCountdown>().instance + " generations to break the cycle.";
         Instantiate(Tombstone, new Vector2(0,-1.51f), transform.rotation);
         Rotator.GetComponent<RotateWorld>().canMove = false;
         Destroy(gameObject);
+        restartButton.SetActive(true);
+        menuButton.SetActive(true);
     }
 }

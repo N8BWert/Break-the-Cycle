@@ -15,4 +15,14 @@ public class Collision : MonoBehaviour
     {
         
     }
+    void OnTriggerEnter2D(Collider2D other) {
+        if(other.CompareTag("Player")) {
+            other.GetComponent<PlayerScript>().onPlatform = true;
+        }
+    }
+    void OnTriggerExit2D(Collider2D other) {
+        if(other.CompareTag("Player")) {
+            other.GetComponent<PlayerScript>().onPlatform = false;
+        }
+    }
 }

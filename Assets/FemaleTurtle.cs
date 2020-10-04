@@ -9,9 +9,13 @@ public class FemaleTurtle : MonoBehaviour
     Animator anim;
     public GameObject turtleHolder;
 
+    AudioSource source;
+    public AudioClip kiss;
+
     void Start()
     {
         anim = GetComponent<Animator>();
+        source = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -22,6 +26,7 @@ public class FemaleTurtle : MonoBehaviour
     void OnTriggerEnter2D(Collider2D col) {
         if(col.CompareTag("Player")) {
             anim.SetBool("isActive", true);
+            source.PlayOneShot(kiss);
         }
     }
     public void HeartCreate() {

@@ -24,6 +24,7 @@ public class SwitchTop : MonoBehaviour
         if(col.CompareTag("Player")) {
             Sprites[spriteIndex].SetActive(false);
             spriteIndex ++;
+            Mathf.Clamp(spriteIndex, 0, 7);
             Sprites[spriteIndex].SetActive(true);
             if(isTop) {
                 femaleTurtle.SetActive(true);
